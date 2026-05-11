@@ -26,7 +26,7 @@ headers: {
 },
 
 body: JSON.stringify({
-  model: "google/gemma-3-27b-it:free",
+  model: "openrouter/free",
   messages: req.body.messages,
   max_tokens: 300
 })
