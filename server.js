@@ -1,7 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const fetch = require("node-fetch");
-require("dotenv").config();
 
 const app = express();
 
@@ -16,27 +14,23 @@ app.post("/chat", async (req, res) => {
 
   try {
 
-    const response = await fetch(
-      "https://openrouter.ai/api/v1/chat/completions",
-      {
-        method: "POST",
+    const { messages } = req.body;
 
-        headers: {
-          "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
-          "Content-Type": "application/json"
-        },
-
-        body: JSON.stringify({
-
-          model: "openai/gpt-4.1-mini",
-
-          messages: req.body.messages
-
-        })
-      }
-    );
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "openai/gpt-4.1-mini",
+        messages: messages
+      })
+    });
 
     const data = await response.json();
+
+    console.log(data);
 
     res.json({
       reply: data.choices[0].message.content
@@ -54,8 +48,6 @@ app.post("/chat", async (req, res) => {
 
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log("Server çalışıyor");
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Server started");
 });
