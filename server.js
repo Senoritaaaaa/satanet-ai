@@ -26,7 +26,7 @@ headers: {
 },
 
 body: JSON.stringify({
-  model: "mistralai/mistral-7b-instruct:free",
+  model: "google/gemma-3-27b-it:free",
   messages: req.body.messages,
   max_tokens: 300
 })
