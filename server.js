@@ -23,7 +23,7 @@ app.post("/chat", async (req, res) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        model: "openai/gpt-4.1-mini",
+        model: "deepseek/deepseek-chat-v3-0324:free",
         messages: messages
       })
     });
