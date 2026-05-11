@@ -8,6 +8,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.get("/", (req, res) => {
+  res.send("AI Server Running");
+});
+
 app.post("/chat", async (req, res) => {
 
   try {
